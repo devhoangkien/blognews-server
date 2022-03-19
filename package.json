@@ -1,10 +1,13 @@
 {
   "name": "server",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "",
-  "author": "",
+  "author": {
+    "name": "Devhoangkien",
+    "url": "https://github.com/devhoangkien"
+  },
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
