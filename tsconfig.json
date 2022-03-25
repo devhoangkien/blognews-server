@@ -6,7 +6,12 @@
     "declaration": true,
     "noImplicitAny": false,
     "removeComments": true,
-    "lib": ["dom", "es2015", "es2016", "es2017"],
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016",
+      "es2017"
+    ],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
@@ -18,14 +23,28 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths": {
-      "@app": ["./"],
-      "@app/*": ["./*"]
+      "@app": [
+        "./"
+      ],
+      "@app/*": [
+        "./*"
+      ]
     }
   },
   "typeAcquisition": {
-    "include": ["jest"]
+    "include": [
+      "jest"
+    ]
   },
-  "include": ["src/**/*", "test/**/*"],
-  "exclude": ["node_modules", "dist"],
-  "typeRoots": ["node_modules/@types"]
+  "include": [
+    "src/**/*",
+    "test/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "typeRoots": [
+    "node_modules/@types"
+  ]
 }

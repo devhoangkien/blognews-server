@@ -4,20 +4,20 @@
  * @author Devhoangkien <https://github.com/devhoangkien>
  */
 
- import helmet from 'helmet'
- import passport from 'passport'
- import bodyParser from 'body-parser'
- import cookieParser from 'cookie-parser'
- import compression from 'compression'
- import { NestFactory } from '@nestjs/core'
- import { AppModule } from '@app/app.module'
- import { HttpExceptionFilter } from '@app/filters/error.filter'
- import { TransformInterceptor } from '@app/interceptors/transform.interceptor'
- import { ErrorInterceptor } from '@app/interceptors/error.interceptor'
- import { environment, isProdEnv } from '@app/app.environment'
- import * as APP_CONFIG from '@app/app.config'
- import { Logger } from '@nestjs/common';
- import {
+import helmet from 'helmet'
+import passport from 'passport'
+import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
+import compression from 'compression'
+import { NestFactory } from '@nestjs/core'
+import { AppModule } from '@app/app.module'
+import { HttpExceptionFilter } from '@app/common/filters/error.filter'
+import { TransformInterceptor } from '@app/common/interceptors/transform.interceptor'
+import { ErrorInterceptor } from '@app/common/interceptors/error.interceptor'
+import { environment, isProdEnv } from '@app/app.environment'
+import * as APP_CONFIG from '@app/app.config'
+import { Logger } from '@nestjs/common';
+import {
   DocumentBuilder,
   SwaggerCustomOptions,
   SwaggerModule,
@@ -25,22 +25,22 @@
 import expressBasicAuth from 'express-basic-auth'
 
 
- 
- async function bootstrap() {
-   // MARK: keep logger enabled on dev env
-   const app = await NestFactory.create(AppModule, isProdEnv ? { logger: false } : {})
 
-   app.use(helmet())
-   app.use(compression())
-   app.use(cookieParser())
-   app.use(bodyParser.json({ limit: '1mb' }))
-   app.use(bodyParser.urlencoded({ extended: true }))
-   app.use(passport.initialize())
-   app.useGlobalFilters(new HttpExceptionFilter())
-   app.useGlobalInterceptors(new TransformInterceptor(), new ErrorInterceptor())
+async function bootstrap() {
+  // MARK: keep logger enabled on dev env
+  const app = await NestFactory.create(AppModule, isProdEnv ? { logger: false } : {})
 
-   // Swagger
-   if (APP_CONFIG.SWAGGER.SWAGGER_IS_SHOW === 'true') {
+  app.use(helmet())
+  app.use(compression())
+  app.use(cookieParser())
+  app.use(bodyParser.json({ limit: '1mb' }))
+  app.use(bodyParser.urlencoded({ extended: true }))
+  app.use(passport.initialize())
+  app.useGlobalFilters(new HttpExceptionFilter())
+  app.useGlobalInterceptors(new TransformInterceptor(), new ErrorInterceptor())
+
+  // Swagger
+  if (APP_CONFIG.SWAGGER.SWAGGER_IS_SHOW === 'true') {
     app.use(
       [APP_CONFIG.SWAGGER.SWAGGER_PATH],
       expressBasicAuth({
@@ -67,10 +67,10 @@ import expressBasicAuth from 'express-basic-auth'
   }
 
   // App listen
-   return await app.listen(APP_CONFIG.APP.PORT)
- }
- 
- const logger = new Logger('Bootstrap');
- bootstrap().then(async() => {
-  await logger.log(`NodePress Run! port at ${APP_CONFIG.APP.PORT}, env: ${environment}`)
- })
+  return await app.listen(APP_CONFIG.APP.PORT)
+}
+
+const logger = new Logger('Bootstrap');
+bootstrap().then(async () => {
+  await logger.log(`TheTricks API Run! port at ${APP_CONFIG.APP.PORT}, env: ${environment}`)
+})
