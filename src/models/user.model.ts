@@ -17,7 +17,7 @@ export enum UserStatus {
 }
 
 export enum UserRole {
-  SUPER_ADMIN = 'SUPER',
+  SUPER_ADMIN = 'SUPER_ADMIN',
   ADMIN = 'ADMIN',
   USER = 'USER',
 }
@@ -49,6 +49,16 @@ export class User {
   @MaxLength(30)
   @prop({ required: true, validate: /\S+/ })
   email: string
+
+  @IsString()
+  @MaxLength(20)
+  @prop({ required: false })
+  firstName: string
+
+  @IsString()
+  @MaxLength(20)
+  @prop({ required: false })
+  lastName: string
 
   @IsNotEmpty()
   @IsString()
